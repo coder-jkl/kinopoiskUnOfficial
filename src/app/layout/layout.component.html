@@ -56,33 +56,34 @@
       [(tuiDropdownOpen)]="openDropMenuAvatar"
     >
       {{ userName.substring(0, 1) }}
-      <ng-template #dropMenuAvatar>
-        <tui-data-list [size]="'s'">
-          @for (item of dropMenuAvatarItems; track item.link) {
-            @if (item.link === '/login') {
-              <button 
-              [iconStart]="'@tui.log-out'" 
-              [routerLink]="item.link" 
-              tuiOption 
-              (click)="onLogout()" 
-              [style.justifyContent]="'unset'">
-                {{ item.title }}
-              </button>
-            } @else {
-              <button 
-              [iconStart]="'@tui.' + item.icon" 
-              [routerLink]="item.link" 
-              tuiOption 
-              [style.justifyContent]="'unset'">
-                {{ item.title }}
-              </button>
-            }
-          }
-        </tui-data-list>
-      </ng-template>
     </tui-avatar>
   </div>
 </header>
+
+  <ng-template #dropMenuAvatar>
+    <tui-data-list [size]="'s'">
+      @for (item of dropMenuAvatarItems; track item.link) {
+        @if (item.link === '/login') {
+          <button
+            [iconStart]="'@tui.log-out'"
+            [routerLink]="item.link"
+            tuiOption
+            (click)="onLogout()"
+            [style.justifyContent]="'unset'">
+            {{ item.title }}
+          </button>
+        } @else {
+          <button
+            [iconStart]="'@tui.' + item.icon"
+            [routerLink]="item.link"
+            tuiOption
+            [style.justifyContent]="'unset'">
+            {{ item.title }}
+          </button>
+        }
+      }
+    </tui-data-list>
+  </ng-template>
 
 <tui-drawer
   *tuiPopup="openBgMenu()"
@@ -92,39 +93,37 @@
   (click.self)="onClose()"
 >
   <header class="header">
-    <ng-container>
-      <tui-textfield
-        tuiTextfieldSize="m"
-        [style.maxWidth.px]="400"
-        [style.width.%]="100"
-      >
-        <label tuiLabel>Поиск</label>
-        <input tuiTextfield />
-        <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
-      </tui-textfield>
-    </ng-container>
+    <tui-textfield
+      tuiTextfieldSize="m"
+      [style.maxWidth.px]="400"
+      [style.width.%]="100"
+    >
+      <label tuiLabel>Поиск</label>
+      <input tuiTextfield />
+      <tui-icon icon="@tui.search" [style.fontSize.px]="20" />
+    </tui-textfield>
   </header>
 
   <div tuiItemGroup [style.flexDirection]="'column'">
     @for (item of headerMenuItems; track item) {
-    <label
-      tuiChip
-      size="s"
-      [appearance]="item.link === currentLink ? 'primary' : 'outline'"
-      [routerLink]="item.link"
-      [style.width.%]="100"
-    >
-      {{ item.title }}
-      <input
-        appearance=""
-        name="radio"
+      <label
         tuiChip
-        type="radio"
-        [value]="item.link"
-        [(ngModel)]="currentLink"
-        (ngModelChange)="onClose()"
-      />
-    </label>
+        size="s"
+        [appearance]="item.link === currentLink ? 'primary' : 'outline'"
+        [routerLink]="item.link"
+        [style.width.%]="100"
+      >
+        {{ item.title }}
+        <input
+          appearance=""
+          name="radio"
+          tuiChip
+          type="radio"
+          [value]="item.link"
+          [(ngModel)]="currentLink"
+          (ngModelChange)="onClose()"
+        />
+      </label>
     }
   </div>
 </tui-drawer>
